@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star Wars universe planets</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/planets.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/planets.js') }}" defer></script>
+</head>
+<body>
+    <h1>Star Wars universe planets</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Diameter (km)</th>
+            <th>Climate</th>
+            <th>Terrain</th>
+            <th>Surface water percentage</th>
+            <th>Population</th>
+            <th>Residents</th>
+        </tr>
+        {% for name, diameter, climate, terrain, surface_water, population, residents in planets %}
+        <tr>
+            <td> {{ name }} </td>
+            <td> {{ diameter }} </td>
+            <td> {{ climate }} </td>
+            <td> {{ terrain }} </td>
+            <td> {{ surface_water }} </td>
+            <td> {{ population }} </td>
+            <td> <button id = "residents" type="button"  data-toggle="modal" data-target="#myModal">{{ residents }}</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
+
