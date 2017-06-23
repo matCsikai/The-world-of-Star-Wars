@@ -3,6 +3,7 @@ table, th, td {
     border: 1px solid gray;
     border-collapse: collapse;
 }
+
 th, td {
     padding: 10px 0 10px 5px;
     text-align: left;

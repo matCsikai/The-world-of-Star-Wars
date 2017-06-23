@@ -6,10 +6,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/planets.css') }}">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/planets.js') }}" defer></script>
 </head>
 <body>
-    <h1>Star Wars universe planets</h1>
+    <p>
+        <h1>Star Wars universe planets</h1>
+        <input class="btn btn-secondary" action="action" type="button" name="Registration" value="Registration" />
+        <input class="btn btn-secondary" action="action" type="button" name="Log In" value="LogIn" />
+    </p>
+    <p>
+        <input class="btn btn-primary" action="action" type="button" name="Previous" value="Previous" />
+        <input class="btn btn-primary" action="action" type="button" name="Next" value="Next" />
+    </p>
     <table>
         <tr>
             <th>Name</th>
@@ -28,12 +40,49 @@
             <td> {{ terrain }} </td>
             <td> {{ surface_water }} </td>
             <td> {{ population }} </td>
-            <td> <button id = "residents" type="button"  data-toggle="modal" data-target="#myModal">{{ residents }}</button>
-            </td>
+            <td><button type="button" class="btn btn-primary" id="residents" data-toggle="modal" data-target="#exampleModal">
+                {{ residents }}
+                </button></td>
         </tr>
         {% endfor %}
-    </table>
-    
+        </table>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Residents of {{ name }}</h5>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Height</th>
+                        <th>Mass</th>
+                        <th>Hair color</th>
+                        <th>Skin color</th>
+                        <th>Eye color</th>
+                        <th>Birth year</th>
+                        <th>Gender</th>
+                    </tr>
+                    <tr>
+                        <td id="name"></td>
+                        <td id="height"></td>
+                        <td id="mass"> {{ mass }} </td>
+                        <td id="hair_color"> {{ hair_color }} </td>
+                        <td id="skin_color"> {{ skin_color }} </td>
+                        <td id="eye_color"> {{ eye_color }} </td>
+                        <td id="birth_year"> {{ birth_year }} </td>
+                        <td id="gender"> {{ gender }} </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
 </body>
 </html>
 
