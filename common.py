@@ -1,13 +1,16 @@
 import requests
 
 
-def get_planet_data():
-    response = requests.get('http://swapi.co/api/planets/').json()
-    return response['results']
 
 
-def formatting_planet_population_data():
-    data_of_planets = get_planet_data()
+def get_planet_data(planet_route):
+    response = requests.get(planet_route).json()
+    return response
+
+
+def formatting_planet_population_data(planet_route):
+    response = get_planet_data(planet_route)
+    data_of_planets = response['results']
     for planet_data in data_of_planets:
         for key in planet_data:
             if key == 'population' and planet_data['population'] != 'unknown':
@@ -18,21 +21,26 @@ def formatting_planet_population_data():
     return data_of_planets
 
 
-def formatting_planet_residents_data():
-    data_of_planets = formatting_planet_population_data()
+def formatting_planet_residents_data(planet_route):
+    data_of_planets = formatting_planet_population_data(planet_route)
     for planet_data in data_of_planets:
         for key in planet_data:
             if key == 'residents':
                 residents = len(planet_data['residents'])
                 if residents == 0:
-                    planet_data['residents'] = 'No known residents'
+                    planet_data['residents'] = ['No known residents']
                 else:
-                    planet_data['residents'] = str(residents) + ' known resident(s)'
+                    url_list = []
+                    for resident_url in planet_data['residents']:
+                        url_list.append(resident_url)
+                    url_string = ",".join(url_list)
+                    print(url_string)
+                    planet_data['residents'] = [str(residents) + ' known resident(s)', url_string]
     return data_of_planets
 
 
-def formatting_planet_water_data():
-    data_of_planets = formatting_planet_residents_data()
+def formatting_planet_water_data(planet_route):
+    data_of_planets = formatting_planet_residents_data(planet_route)
     for planet_data in data_of_planets:
         for key in planet_data:
             if key == 'surface_water' and planet_data['surface_water'] != 'unknown':
@@ -40,8 +48,8 @@ def formatting_planet_water_data():
                 planet_data['surface_water'] = surface_water + ' %'
     return data_of_planets
 
-def get_required_planet_data():
-    data_of_planets = formatting_planet_water_data()
+def get_required_planet_data(planet_route):
+    data_of_planets = formatting_planet_water_data(planet_route)
     required_data_of_planets = []
     for planet_data in data_of_planets:
         planet_data_keys = ['name', 'diameter', 'climate', 'terrain', 'surface_water', 'population', 'residents']
@@ -54,4 +62,3 @@ def get_required_planet_data():
 
 
 
-#print(get_required_planet_data())
