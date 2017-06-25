@@ -1,4 +1,3 @@
-
 from common import get_required_planet_data, get_planet_data
 from flask import Flask, render_template, request, redirect, url_for, session, escape
 import requests
