@@ -8,7 +8,7 @@ $(document).ready(function(){
                 dataType: "json",
                 url: value,
                 success: function(residentData) {
-                    var attributes = residentData
+                    var attributes = residentData;
                     var personalData = "<tr>";
                     $.each(attributes, function (key, value) {
                         if (key === "homeworld") {
