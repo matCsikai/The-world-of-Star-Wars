@@ -32,6 +32,7 @@ def formatting_planet_residents_data(planet_route):
                     for resident_url in planet_data['residents']:
                         url_list.append(resident_url)
                     url_string = ",".join(url_list)
+                    url_string = url_string.replace('http', 'https')
                     planet_data['residents'] = [str(number_of_residents) + ' known resident(s)', url_string]
     return data_of_planets
 
